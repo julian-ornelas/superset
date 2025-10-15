@@ -94,12 +94,40 @@ export default styled.div`
     }
 
     .dt-pagination {
-      text-align: right;
-      /* use padding instead of margin so clientHeight can capture it */
-      padding-top: 0.5em;
+      text-align: center;
+      padding: ${theme.gridUnit * 2}px ${theme.gridUnit * 3}px;
+      box-sizing: border-box;
+      z-index: 2;
     }
     .dt-pagination .pagination {
-      margin: 0;
+      margin: 0 auto;
+      display: inline-block;
+    }
+    .dt-pagination .pagination > li > a,
+    .dt-pagination .pagination > li > span {
+      padding: ${theme.gridUnit * 1.5}px ${theme.gridUnit * 2}px;
+      border-radius: ${theme.borderRadius}px;
+      min-width: ${theme.gridUnit * 4}px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: ${theme.colors.grayscale.base};
+      background: transparent;
+      border: 1px solid transparent;
+      font-family: ${theme.typography.families.sansSerif};
+      font-size: ${theme.typography.sizes.s}px;
+      line-height: 1;
+    }
+    .dt-pagination .pagination > li.active > a {
+      background: ${theme.colors.primary.base};
+      color: ${theme.colors.grayscale.light5};
+      border-color: ${theme.colors.primary.base};
+    }
+    .dt-pagination .pagination > li > a:hover,
+    .dt-pagination .pagination > li > span:hover {
+      background: ${theme.colors.grayscale.light5};
+      color: ${theme.colors.grayscale.base};
+      text-decoration: none;
     }
 
     .pagination > li > span.dt-pagination-ellipsis:focus,
