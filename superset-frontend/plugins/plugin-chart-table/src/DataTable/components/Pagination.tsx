@@ -88,9 +88,29 @@ export default memo(
       currentPage,
       maxPageItemCount,
     );
+    const canGoPrevious = currentPage > 0;
+    const canGoNext = currentPage < pageCount - 1;
+
     return (
       <div ref={ref} className="dt-pagination" style={style}>
         <ul className="pagination pagination-sm">
+          <li className={!canGoPrevious ? 'disabled' : undefined}>
+            <a
+              href="#previous"
+              role="button"
+              onClick={e => {
+                e.preventDefault();
+                if (canGoPrevious) {
+                  onPageChange(currentPage - 1);
+                }
+              }}
+              aria-label="Previous page"
+              aria-disabled={!canGoPrevious}
+            >
+              «
+            </a>
+          </li>
+
           {pageItems.map(item =>
             typeof item === 'number' ? (
               // actual page number
@@ -115,6 +135,23 @@ export default memo(
               </li>
             ),
           )}
+
+          <li className={!canGoNext ? 'disabled' : undefined}>
+            <a
+              href="#next"
+              role="button"
+              onClick={e => {
+                e.preventDefault();
+                if (canGoNext) {
+                  onPageChange(currentPage + 1);
+                }
+              }}
+              aria-label="Next page"
+              aria-disabled={!canGoNext}
+            >
+              »
+            </a>
+          </li>
         </ul>
       </div>
     );
