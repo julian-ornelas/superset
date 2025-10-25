@@ -54,6 +54,7 @@ interface VizTypeGalleryProps {
   selectedViz: string | null;
   className?: string;
   denyList: string[];
+  isOpen?: boolean;
 }
 
 type VizEntry = {
@@ -436,7 +437,7 @@ const doesVizMatchSelector = (viz: ChartMetadata, selector: string) =>
   (viz.tags || []).indexOf(selector) > -1;
 
 export default function VizTypeGallery(props: VizTypeGalleryProps) {
-  const { selectedViz, onChange, onDoubleClick, className, denyList } = props;
+  const { selectedViz, onChange, onDoubleClick, className, denyList, isOpen } = props;
   const { mountedPluginMetadata } = usePluginContext();
   const searchInputRef = useRef<HTMLInputElement>();
   const [searchInputValue, setSearchInputValue] = useState('');
@@ -584,6 +585,14 @@ export default function VizTypeGallery(props: VizTypeGalleryProps) {
     setSearchInputValue('');
     searchInputRef.current!.blur();
   }, []);
+
+  useEffect(() => {
+    if (isOpen !== false) {
+      queueMicrotask(() => {
+        searchInputRef.current?.focus();
+      });
+    }
+  }, [isOpen]);
 
   const clickSelector = useCallback(
     (selector: string, sectionId: string) => {
