@@ -96,10 +96,68 @@ export default styled.div`
     .dt-pagination {
       text-align: right;
       /* use padding instead of margin so clientHeight can capture it */
-      padding-top: 0.5em;
+      padding: ${theme.gridUnit * 2}px ${theme.gridUnit * 2}px;
+      overflow: visible;
+      min-height: 48px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
     .dt-pagination .pagination {
       margin: 0;
+      display: flex;
+      align-items: center;
+      gap: ${theme.gridUnit}px;
+    }
+    .dt-pagination .pagination > li {
+      margin: 0;
+      list-style: none;
+    }
+    .dt-pagination .pagination > li > a,
+    .dt-pagination .pagination > li > span {
+      padding: ${theme.gridUnit}px ${theme.gridUnit * 2}px;
+      min-width: 28px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: ${theme.borderRadius}px;
+      background-color: transparent;
+      color: ${theme.colors.grayscale.dark1};
+      cursor: pointer;
+      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+      font-size: ${theme.typography.sizes.s}px;
+    }
+    .dt-pagination .pagination > li > a:hover,
+    .dt-pagination .pagination > li > span:hover {
+      color: ${theme.colors.primary.dark1};
+      background-color: ${theme.colors.grayscale.light5};
+    }
+    .dt-pagination .pagination > li.active > a,
+    .dt-pagination .pagination > li.active > a:hover {
+      background-color: ${theme.colors.primary.base};
+      border: 1px solid ${theme.colors.primary.base};
+      color: ${theme.colors.grayscale.light5};
+      cursor: default;
+    }
+    .dt-pagination .pagination > li.disabled > a,
+    .dt-pagination .pagination > li.disabled > a:hover {
+      cursor: not-allowed;
+      opacity: 1;
+      color: ${theme.colors.grayscale.dark1};
+      background-color: transparent;
+    }
+    .dt-pagination .pagination > li.dt-pagination-ellipsis > span {
+      border: none;
+      background: transparent;
+      cursor: default;
+    }
+    .dt-pagination .pagination > li.dt-pagination-ellipsis > span:hover {
+      border: none;
+      background: transparent;
+      color: ${theme.colors.grayscale.base};
     }
 
     .pagination > li > span.dt-pagination-ellipsis:focus,
