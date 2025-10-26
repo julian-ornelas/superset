@@ -217,6 +217,27 @@ describe('VizTypeControl', () => {
     ).toBeInTheDocument();
   });
 
+  it('Auto-focuses search input when modal opens', async () => {
+    await waitForRenderWrapper();
+
+    const input = await screen.findByTestId(getTestId('search-input'));
+    await waitFor(() => expect(input).toHaveFocus());
+  });
+
+  it('Re-focuses search input on re-open', async () => {
+    await waitForRenderWrapper({ ...defaultProps, isModalOpenInit: false });
+
+    userEvent.click(screen.getByText('View all charts'));
+    const inputOpen = await screen.findByTestId(getTestId('search-input'));
+    await waitFor(() => expect(inputOpen).toHaveFocus());
+
+    userEvent.click(await screen.findByTestId('modal-cancel-button'));
+
+    userEvent.click(screen.getByText('View all charts'));
+    const inputReopen = await screen.findByTestId(getTestId('search-input'));
+    await waitFor(() => expect(inputReopen).toHaveFocus());
+  });
+
   it('Search visualization type', async () => {
     await waitForRenderWrapper();
 

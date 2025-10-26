@@ -137,6 +137,7 @@ const VizTypeControl = ({
           selectedViz={selectedViz}
           onChange={setSelectedViz}
           onDoubleClick={onSubmit}
+          isOpen={showModal}
           denyList={denyList}
         />
       </UnpaddedModal>
